@@ -1,0 +1,141 @@
+
+<form [formGroup]="robustnessForm" (ngSubmit) ="onSubmit()">
+  <h2>Information about Nodes</h2>
+  
+  <label>
+    Number of Nodes :
+    <input type="text" formControlName ="numberOfNodes" placeholder="required">
+  </label>
+  <p>
+    <button type="submit">Submit</button>
+  </p>
+  </form>
+  
+  <!-- <div [formGroup]="form">
+    <div>
+      <input type="text" formControlName="numberOfConnectingNodes" required>
+    </div>
+    <div>
+  
+    </div> -->
+  
+  
+  <div *ngIf="totalNodes>0;">
+    <div *ngFor="let i of countIndex(totalNodes)">
+      
+      
+      
+      
+      <table>
+        <tr>
+          <th>
+            Node {{i+1}}
+          </th>
+          
+        </tr>
+        <tr>
+          <td>
+            
+            <label>
+              Enter Number of Connecting Nodes for Node {{i+1}}:
+             </label>
+  
+  
+          </td>
+          <td>
+  
+            <input type="text" ngModel (ngModelChange)="setNumberOfConnectingNode($event,i)" placeholder="required">
+  
+          </td>
+         
+        </tr>
+        <tr *ngIf="objarray[i].degree>0;" >  
+          <td>
+            <label>
+              Enter Name of Connecting Nodes for Node {{i+1}}:
+             </label>
+            </td>
+          <td>
+            
+            <input [value]="connectingNodeNames" (change)="setNameOfConnectingNode($event,i)" placeholder="required">
+  
+          </td>
+         
+        </tr>
+      </table>
+  
+      <br>
+     
+      <br>
+  
+     
+        </div>
+        <button (click)="CalculateRobustness()">Calculate Robustness</button>
+      </div>
+  
+  
+      <!-- <div *ngIf="toggle"> 
+        <p>Value of robustness for High Degree Centrality Attack</p>
+        <p>{{robustnessHDA}}</p>
+        <p>Value of robustness for Random Attack</p>
+        <p>{{robustnessRandom}}</p>
+        <p>Value of robustness for Exhaustive Combination</p>
+        <p>{{robustnessEC}}</p>
+      </div> -->
+      
+  
+      <div *ngIf="toggle"> 
+        <table>
+          <tr>
+            <th>
+              Robustness of entered network
+            </th>
+          </tr>
+          <tr>
+            <td>
+              <p><i>
+                The network centrality measure helps identifying the central
+                nodes based on their position in the supply chain. The importance of a node can be evaluated using centrality measures like degree.
+                The tool uses sequential High Degree Centrality Attack (HDA) attack strategy for calculating robustness.
+              </i></p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+             <label class="other">Value of robustness for HDA Attack</label> 
+            </td>
+          
+            <td>
+              <output class="other">{{robustnessHDA}}</output>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p><i>In random attack, the nodes are removed in randomfashion till N-1 nodes,  where N represents the totalnodes in the supply chain network.</i></p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label class="other">Value of robustness for Random Attack</label>
+            </td>
+            <td>
+              <output class="other">{{robustnessRandom}}</output>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p><i>To calculate the robustness of the entered supply chain, every disruption event is considered. The provided robustness value os the 
+                mean of all the robustness values obtained.</i></p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+             <label class="other"> Value of robustness for Exhaustive Combination</label>
+            </td>
+            <td>
+             <output class="other">{{robustnessEC}}</output> 
+            </td>
+          </tr>
+        </table>
+      </div>
+  <!-- </ng-template> -->
